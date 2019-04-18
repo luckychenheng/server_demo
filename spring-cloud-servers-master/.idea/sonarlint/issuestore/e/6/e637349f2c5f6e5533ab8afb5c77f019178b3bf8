@@ -1,0 +1,7 @@
+
+bsquid:CommentedOutCodeLine:"<This block of commented-out lines of code should be removed.(¨Ïë°
+]squid:S2142H"FEither re-interrupt this method or rethrow the "InterruptedException".(ä ¹€
+Fsquid:S1611?"/Remove the parentheses around the "e" parameter(Ç»ƒ»
+ysquid:UselessImportCheck"PRemove this unused import 'io.netty.handler.codec.LengthFieldBasedFrameDecoder'.(’þêÕÿÿÿÿÿ
+qsquid:UselessImportCheck"HRemove this unused import 'io.netty.handler.codec.string.StringDecoder'.(ºôÅ«úÿÿÿÿ
+?squid:S1148I"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ

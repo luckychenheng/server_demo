@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spring-cloud-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spring-cloud-auth" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spring-cloud-auth/spring-cloud-auth-client" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spring-cloud-auth/spring-cloud-auth-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spring-cloud-auth/spring-cloud-auth-server" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spring-cloud-center" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spring-cloud-gateway" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spring-cloud-moudle" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spring-cloud-moudle/spring-cloud-moudle-rpc" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spring-cloud-moudle/spring-cloud-moudle-study" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spring-cloud-netty" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spring-cloud-netty/spring-cloud-netty-client" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spring-cloud-netty/spring-cloud-netty-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/spring-cloud-netty/spring-cloud-netty-server" charset="UTF-8" />
+  </component>
+</project>

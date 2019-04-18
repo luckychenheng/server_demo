@@ -1,0 +1,37 @@
+spring:
+    application:
+        name: spring-cloud-netty-server
+    jackson:
+        date-format: yyyy-MM-dd HH:mm:ss
+        time-zone: GMT+8
+        default-property-inclusion: non_null
+    sleuth:
+      enabled: true
+      http:
+        legacy:
+          enabled: true
+    cloud:
+      consul:
+        enabled: true
+        host: 127.0.0.1
+        port: 8500
+        discovery:
+          healthCheckPath: /actuator/health
+          healthCheckInterval: 5s
+          instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+          register: true
+          enabled: true
+
+server:
+    port: 8884 #启动端口
+
+eureka:
+    instance:
+        statusPageUrlPath: /actuator/info
+        healthCheckUrlPath: /actuator/health
+        # docker 部署开启
+        prefer-ip-address: true
+        ip-address: 127.0.0.1
+    client:
+        serviceUrl:
+            defaultZone: http://${EUREKA_HOST:localhost}:${EUREKA_PORT:8880}/eureka/

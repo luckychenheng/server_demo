@@ -1,0 +1,153 @@
+server:
+  port: 8882
+
+eureka:
+    instance:
+        statusPageUrlPath: /actuator/info
+        healthCheckUrlPath: /actuator/health
+        home-page-url-path: /
+    client:
+        serviceUrl:
+            defaultZone: http://${EUREKA_HOST:localhost}:${EUREKA_PORT:8880}/eureka/
+
+#请求和响应GZIP压缩支持
+feign:
+  httpclient:
+    enabled: false
+  okhttp:
+    enabled: true
+  compression:
+    request:
+      enabled: true
+      mime-types: text/xml,application/xml,application/json
+      min-request-size: 2048
+    response:
+      enabled: true
+
+spring:
+  application:
+      name: spring-cloud-gateway
+  redis:
+      database: 2
+      host: 127.0.0.1
+      jedis:
+        pool:
+            max-active: 20
+  rabbitmq:
+      host: ${RABBIT_MQ_HOST:47.98.179.77}
+      port:  ${RABBIT_MQ_PORT:5672}
+      username: admin
+      password: admin
+  sleuth:
+    enabled: true
+    http:
+      legacy:
+        enabled: true
+  cloud:
+     gateway:
+       discovery:
+         locator:
+           lowerCaseServiceId: true
+           enabled: true
+       routes:
+        # =====================================
+        - id: spring-cloud-auth
+          uri: lb://spring-cloud-auth
+          order: 8000
+          predicates:
+          - Path=/api/auth/**
+          filters:
+          - StripPrefix=2
+        - id: spring-cloud-moudle-rpc
+          uri: lb://spring-cloud-moudle-rpc
+          order: 8000
+          predicates:
+          - Path=/api/moudle/**
+          filters:
+          - StripPrefix=2
+  consul:
+    enabled: true
+    host: 127.0.0.1
+    port: 8500
+    discovery:
+      healthCheckPath: /actuator/health
+      healthCheckInterval: 5s
+      instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+      register: true
+      enabled: true
+
+logging:
+  level:
+    com.spring.cloud.gateway: info
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  security:
+    enabled: false
+
+
+gate:
+  ignore:
+    startWith: /moudle/token
+
+
+auth:
+  serviceId: spring-cloud-auth
+  user:
+    token-header: Authorization
+    pub-key:
+      path: jwt/pub.key
+  client:
+    token-header: client-token
+    id: spring-cloud-gate  #不填则默认读取spring.application.name
+    secret: 123456
+    pub-key:
+      path: client/pub.key
+    ratelimit:
+      resubmit:
+        limit-count: 1
+        refresh-interval: 3000
+
+feign:
+  httpclient:
+    enabled: false
+  okhttp:
+    enabled: true
+
+ribbon:
+  eureka:
+    enabled: true
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 1
+  OkToRetryOnAllOperations: false
+
+hystrix:
+  threadpool:
+    default:
+      coreSize: 1000 ##并发执行的最大线程数，默认10
+      maxQueueSize: 1000 ##BlockingQueue的最大队列数
+      queueSizeRejectionThreshold: 500 ##即使maxQueueSize没有达到，达到queueSizeRejectionThreshold该值后，请求也会被拒绝
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
+
+
+jwt:
+  refreshMinSecond: 86400
+  token-header: Authorization
+  pc:
+    expire: 2592000
+  app:
+    expire: 2592000
+  pri-key:
+    path: jwt/pri.key
+  pub-key:
+    path: jwt/pub.key

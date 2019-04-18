@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="spring-cloud-api" />
+        <module name="spring-cloud-auth-client" />
+        <module name="spring-cloud-auth-common" />
+        <module name="spring-cloud-auth-server" />
+        <module name="spring-cloud-center" />
+        <module name="spring-cloud-gateway" />
+        <module name="spring-cloud-moudle-rpc" />
+        <module name="spring-cloud-moudle-study" />
+        <module name="spring-cloud-netty-client" />
+        <module name="spring-cloud-netty-common" />
+        <module name="spring-cloud-netty-server" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="spring-cloud-api" target="1.8" />
+      <module name="spring-cloud-auth" target="1.8" />
+      <module name="spring-cloud-auth-client" target="1.8" />
+      <module name="spring-cloud-auth-common" target="1.8" />
+      <module name="spring-cloud-auth-server" target="1.8" />
+      <module name="spring-cloud-center" target="1.8" />
+      <module name="spring-cloud-gateway" target="1.8" />
+      <module name="spring-cloud-moudle" target="1.8" />
+      <module name="spring-cloud-moudle-rpc" target="1.8" />
+      <module name="spring-cloud-moudle-study" target="1.8" />
+      <module name="spring-cloud-netty" target="1.8" />
+      <module name="spring-cloud-netty-client" target="1.8" />
+      <module name="spring-cloud-netty-common" target="1.8" />
+      <module name="spring-cloud-netty-server" target="1.8" />
+      <module name="spring-cloud-servers-master" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
