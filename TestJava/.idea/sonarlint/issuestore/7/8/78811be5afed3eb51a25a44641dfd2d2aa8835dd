@@ -1,0 +1,9 @@
+
+isquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(’©¤Ì8ã£Ç¡£-
+hsquid:S3027"JPut single-quotes around '.' to use the faster "lastIndexOf(char)" method.(ÐÝøù8Ò£”£-
+esquid:S00112"FDefine and throw a dedicated exception instead of using a generic one.(¦‹ã8êÍ„£-
+V
+squid:S106"9Replace this use of System.out or System.err by a logger.(¸ð­§8üÜÙ¡£-
+nsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ñ¥ùšøÿÿÿÿ8ã£Ç¡£-
+¤%squid:RedundantThrowsDeclarationCheck"lRemove the declaration of thrown exception 'java.lang.Exception', as it cannot be thrown from method's body.(¦‹ã8êÍ„£-
+isquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(†€éˆ8ã£Ç¡£-
