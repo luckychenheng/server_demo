@@ -1,0 +1,93 @@
+spring:
+  thymeleaf:
+    cache: true
+    enabled: true
+    encoding: UTF-8
+    mode: HTML
+    prefix: classpath:/templates/
+    servlet:
+      content-type: text/html
+    suffix: .html
+    template-resolver-order: 1
+    check-template: false
+    reactive:
+      max-chunk-size: 8192
+  resources:
+    add-mappings: true
+    chain:
+      cache: 'true '
+      enabled: true
+      html-application-cache: true
+    static-locations: classpath:/static/
+  cloud:
+    gateway:
+      locator:
+        # 开启通过服务中心的自动根据 serviceId 创建路由的功能
+        enabled: true
+      routes:
+        # 鉴权中心
+        - id: miaosha-auth
+          # 目标服务地址，uri以lb://开头（lb代表从注册中心获取服务），后面接的就是你需要转发到的服务名称
+          uri: lb://miaosha-auth
+          # 要拦截的URL配置
+          predicates:
+            - Path=/auth/**
+        # sys 模块
+        - id: miaosha-sys
+          uri: lb://miaosha-sys
+          predicates:
+            - Path=/admin/**
+          # 过滤规则
+          filters:
+            # 降级配置
+            - name: Hystrix
+              args:
+                name: default
+                fallbackUri: 'forward:/fallback'
+        # goods 模块
+        - id: miaosha-mall-goods
+          uri: lb://miaosha-mall-goods
+          predicates:
+            - Path=/goods/**
+          # 过滤规则
+          filters:
+            # 降级配置
+            - name: Hystrix
+              args:
+                name: default
+                fallbackUri: 'forward:/fallback'
+        # order 模块
+        - id: miaosha-mall-order
+          uri: lb://miaosha-mall-order
+          predicates:
+            - Path=/order/**
+          # 过滤规则
+          filters:
+            # 降级配置
+            - name: Hystrix
+              args:
+                name: default
+                fallbackUri: 'forward:/fallback'
+        # seckill 模块
+        - id: miaosha-mall-seckill
+          uri: lb://miaosha-mall-seckill
+          predicates:
+            - Path=/seckill/**
+          # 过滤规则
+          filters:
+            # 降级配置
+            - name: Hystrix
+              args:
+                name: default
+                fallbackUri: 'forward:/fallback'
+# 不校验验证码终端
+ignore:
+  clients:
+    - test
+  swagger-providers:
+    - miaosha-auth
+# @value
+security:
+  encode:
+    # aes密码密钥，必须16位
+    key: '1234567812345678'

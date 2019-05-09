@@ -1,0 +1,167 @@
+# 加解密根密码
+jasypt:
+  encryptor:
+    #根密码
+    password: miaosha
+# redis 相关
+spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    default-property-inclusion: non_null
+  # zipkin
+  zipkin:
+    enabled: true
+    base-url: http://miaosha-zipkin
+  sleuth:
+    web:
+      client:
+        enabled: true
+    sampler:
+      # 默认的采样比率为0.1，不能看到所有请求数据
+      # 更改采样比率为1，就能看到所有的请求数据了，但是这样会增加接口调用延迟
+      probability: 1.0
+  rabbitmq:
+    host: miaosha-rabbitmq
+    port:  5672
+    username: guest
+    password: guest
+    virtual-host:
+    connection-timeout: 15000
+    publisher-confirms: true
+    publisher-returns: true
+    template:
+      mandatory: true
+  redis:
+    password:
+    host: miaosha-redis
+#  thymeleaf:
+#    cache: true
+#    enabled: true
+#    encoding: UTF-8
+#    mode: HTML
+#    prefix: classpath:/templates/
+#    servlet:
+#      content-type: text/html
+#    suffix: .html
+# 暴露监控端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+# feign 配置
+feign:
+  hystrix:
+    enabled: true
+  okhttp:
+    enabled: true
+  httpclient:
+    enabled: false
+  client:
+    config:
+      default:
+        connectTimeout: 10000
+        readTimeout: 10000
+  compression:
+    request:
+      enabled: true
+    response:
+      enabled: true
+
+# hystrix If you need to use ThreadLocal bound variables in your RequestInterceptor`s
+# you will need to either set the thread isolation strategy for Hystrix to `SEMAPHORE or disable Hystrix in Feign.
+hystrix:
+  threadpool:
+    default:
+      ## 并发执行的最大线程数，默认10
+      coreSize: 1000
+      ## BlockingQueue的最大队列数
+      maxQueueSize: 1000
+      ## 即使maxQueueSize没有达到，达到queueSizeRejectionThreshold该值后，请求也会被拒绝
+      queueSizeRejectionThreshold: 500
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: THREAD
+          thread:
+            timeoutInMilliseconds: 1000
+  shareSecurityContext: true
+
+#请求处理的超时时间
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 1
+  OkToRetryOnAllOperations: false
+
+# mybaits-plus配置
+mybatis-plus:
+  type-aliases-package: tech.tengshe789.miaosha.upms.entity
+  # MyBatis Mapper所对应的XML文件位置
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  global-config:
+    # 关闭MP3.0自带的banner
+    banner: false
+    db-config:
+      # 默认数据库表下划线命名
+      table-underline: true
+      # 逻辑删除配置
+      # 逻辑删除全局值（1表示已删除，这也是Mybatis Plus的默认配置）
+      logic-delete-value: 1
+      # 逻辑未删除全局值（0表示未删除，这也是Mybatis Plus的默认配置）
+      logic-not-delete-value: 0
+  configuration:
+    map-underscore-to-camel-case: true
+
+#swagger公共信息
+swagger:
+  title: Miaosha Swagger API
+  description: 全一个基于spring cloud Greenwich的简单秒杀电子商城项目，适合新人阅读。A simple spring cloud based seckill shopping mall project, suitable for young people to read. It can be used as a paper material for academic defense.
+  version: @project.version@
+  license: Custom Apache License
+  terms-of-service-url: https://blog.tengshe789.tech/
+  contact:
+    name: tEngSHe789
+    email: randyvan007@qq.com
+    url: https://blog.tengshe789.tech/about/
+  authorization:
+    name: miaosha OAuth
+    auth-regex: ^.*$
+    authorization-scope-list:
+      - scope: server
+        description: server all
+    token-url-list:
+      - http://miaosha-gateway:9999/auth/oauth/token
+
+## spring security 配置
+security:
+  oauth2:
+    client:
+      client-id: test
+      client-secret: test
+      scope: server
+      # 默认放行url,如果子模块重写这里的配置就会被覆盖
+      ignore-urls:
+        - /actuator/**
+        - /v2/api-docs
+    resource:
+      loadBalanced: true
+      token-info-uri: http://miaosha-auth/oauth/check_token
+#freemarker:
+#  enabled: true
+#  allow-request-override: false
+#  allow-session-override: false
+#  cache: true
+#  charset: UTF-8
+#  check-template-location: true
+#  content-type: text/html
+#  expose-request-attributes: false
+#  expose-session-attributes: false
+#  expose-spring-macro-helpers: true
+#  prefer-file-system-access: true
+#  suffix: .ftl
+#  template-loader-path: classpath:/templates/ftl

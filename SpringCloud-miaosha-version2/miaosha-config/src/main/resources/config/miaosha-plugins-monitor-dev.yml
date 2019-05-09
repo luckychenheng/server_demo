@@ -1,0 +1,13 @@
+spring:
+  # 安全配置
+  security:
+    user:
+      name: miaosha
+      password: miaosha
+  boot:
+    admin:
+      ui:
+        resource-locations: 'classpath:/ui/,classpath:/static/'
+        template-location: 'classpath:/ui/'
+        title: 'SpringCloud-miaosha 服务状态监控'
+        brand: 'SpringCloud-miaosha 服务状态监控'
